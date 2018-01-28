@@ -44,6 +44,7 @@ use rust::RustWrite;
 use std::io::{self, Write};
 
 pub fn compile<W: Write>(
+    // TODO
     grammar: &Grammar,
     intern_token: &InternToken,
     out: &mut RustWrite<W>)
@@ -101,6 +102,7 @@ pub fn compile<W: Write>(
         rust!(out, "{},", literal);
     }
     rust!(out, "];");
+    // TODO: use a thead_local here or something?
     rust!(out, "let {}regex_set = {}regex::RegexSet::new({}strs).unwrap();",
           prefix, prefix, prefix);
 
