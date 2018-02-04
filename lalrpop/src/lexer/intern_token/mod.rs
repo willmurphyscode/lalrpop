@@ -49,11 +49,15 @@ pub fn compile<W: Write>(
     -> io::Result<()>
 {
     let prefix = &grammar.prefix;
-
+    rust!(out, "extern crate lazy_static as {}lazy_static;", prefix);
     rust!(out, "mod {}intern_token {{", prefix);
     rust!(out, "#![allow(unused_imports)]");
     try!(out.write_uses("", &grammar));
     rust!(out, "extern crate regex as {}regex;", prefix);
+    rust!(out, "lazy_static! {{
+    /// This is an example for using doc comment attributes
+    static ref EXAMPLE: u8 = 42;
+}}");
     rust!(out, "use std::fmt as {}fmt;", prefix);
     rust!(out, "");
     rust!(out, "#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]");
