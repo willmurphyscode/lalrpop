@@ -55,7 +55,6 @@ pub fn compile<W: Write>(
     try!(out.write_uses("", &grammar));
     rust!(out, "extern crate regex as {}regex;", prefix);
     rust!(out, "lazy_static! {{
-    /// This is an example for using doc comment attributes
     static ref EXAMPLE: u8 = 42;
 }}");
     rust!(out, "use std::fmt as {}fmt;", prefix);
